@@ -34,7 +34,7 @@ public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
+    
     /** 名前。20桁.null不可*/
     @Column(length = 20, nullable = false)
     @NotEmpty

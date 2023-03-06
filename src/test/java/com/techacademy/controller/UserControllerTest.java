@@ -1,4 +1,4 @@
-package com.techacademy.repository;
+package com.techacademy.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
@@ -60,4 +60,30 @@ class UserControllerTest {
         assertEquals(user.getId(), 1);
         assertEquals(user.getName(), "キラメキ太郎");
     }
+/*
+    @Test
+    @DisplayName("UserList画面")
+    @WithMockUser
+    void testGetList() throws Exception {
+        // HTTPリクエストに対するレスポンスの検証
+        MvcResult result = mockMvc.perform(get("/userlist/list/3/")) // URLにアクセス
+            .andExpect(status().isOk()) // ステータスが「200 OK」か
+            .andExpect(model().attributeExists("userlist")) // Modelにuserlistが含まれているか
+            .andExpect(model().hasNoErrors()) // Modelのエラー有無の確認
+            .andExpect(view().name("user/list")) // viewの名前の確認
+            .andReturn(); // 内容の取得
+
+
+        // userlistの検証
+        // Modelからuserlistを取り出す
+        User user = (User)result.getModelAndView().getModel().get("userlist");
+        assertEquals(user.getId(), 1);
+        assertEquals(user.getName(), "キラメキ太郎");
+        assertEquals(user.getId(), 2);
+        assertEquals(user.getName(), "キラメキ次郎");
+        assertEquals(user.getId(), 3);
+        assertEquals(user.getName(), "キラメキ花子");
+
+    }
+    */
 }

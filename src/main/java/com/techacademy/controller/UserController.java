@@ -8,7 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable; // 追加
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -58,22 +58,35 @@ public class UserController {
     // ----- 追加:ここから -----
     /** User更新画面を表示 */
     @GetMapping("/update/{id}/")
-    public String getUser(@PathVariable("id") Integer id, Model model) {
-        // Modelに登録
-        model.addAttribute("user", service.getUser(id));
+    public String getUser(@PathVariable("id") Integer id, Model model, User user) {
+
+        if(id == null) {
+            model.addAttribute("user", user);
+        }
+        else {
+            // Modelに登録
+            model.addAttribute("user", service.getUser(id));
+        }
         // User更新画面に遷移
         return "user/update";
     }
 
     /** User更新処理 */
     @PostMapping("/update/{id}/")
-    public String postUser(User user) {
+    public String postUser(@Validated User user, BindingResult res, Model model) {
+    //public String postUser(User user) {
+
+        if(res.hasErrors()) {
+            //エラーあり
+            return getUser(null, model, user);
+        }
+
         // User登録
         service.saveUser(user);
         // 一覧画面にリダイレクト
         return "redirect:/user/list";
     }
-    // ----- 追加:ここまで -----
+
 
     /** User削除処理 */
     @PostMapping(path="list", params="deleteRun")
