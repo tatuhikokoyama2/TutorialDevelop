@@ -27,11 +27,13 @@
         <input type="text" th:field="*{age}" th:errorclass="err">
         <span th:errors="*{age}" class="err"></span>
         <br>
+
         <label for="email">メールアドレス</label>
         <input type="text" th:field="*{email}" th:errorclass="err">
         <span th:errors="*{email}" class="err"></span>
         <br>
         <br>
+
         <input type="submit" value="登録実行">
         <a th:href="@{/user/list}">登録せずに一覧に戻る</a>
     </form>

@@ -34,7 +34,7 @@ public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
+
     /** 名前。20桁.null不可*/
     @Column(length = 20, nullable = false)
     @NotEmpty
@@ -54,6 +54,7 @@ public class User{
 
     /** メールアドレス。50桁。null許可　*/
     @Column(length = 50)
+    @NotEmpty
     @Email
     @Length(max = 50)
     private String email;

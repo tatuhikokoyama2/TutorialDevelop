@@ -62,19 +62,23 @@ public class UserController {
 
         if(id == null) {
             model.addAttribute("user", user);
+
+            // User更新画面に遷移
+            return "user/update";
         }
         else {
             // Modelに登録
             model.addAttribute("user", service.getUser(id));
+
+         // User更新画面に遷移
+            return "user/update";
         }
-        // User更新画面に遷移
-        return "user/update";
+
     }
 
     /** User更新処理 */
     @PostMapping("/update/{id}/")
     public String postUser(@Validated User user, BindingResult res, Model model) {
-    //public String postUser(User user) {
 
         if(res.hasErrors()) {
             //エラーあり
